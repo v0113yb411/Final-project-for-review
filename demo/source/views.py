@@ -75,6 +75,16 @@ def add_course(request,pk):
         courses=user.course.all()
         return render(request,'course_list.html',{'courses':courses})
     
+def delete_course(request,pk):
+    if request.method=='GET':
+        delete_data=Course.objects.get(id=pk)
+        print(delete_data)
+        user=Student.objects.get(user=request.user)
+        user.course.remove(delete_data)
+        user.save()
+        courses=user.course.all()
+        return render(request,'course_list.html',{'courses':courses})    
+    
     
     
 
