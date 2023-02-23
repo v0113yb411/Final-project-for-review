@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course_list</title>
+</head>
+
+<body>
+    <h1>
+        Hello this is course list
+        <div>
+            <a style="text-decoration: none;" href="{% url 'more_course' %}">Apply for more course<button></button></a>
+
+        </div>
+    </h1>
+    <div>
+        {% if user.is_superuser %}
+        <button><a href="{% url 'create_course' %}">Create Course</a></button>
+        {% endif %}
+    </div>
+    {% for course in courses %}
+
+    <div>
+        <a href="{% url 'course_detail' course.id %}">{{course}}</a>
+    </div>
+
+    {% endfor %}
+</body>
+
+</html>

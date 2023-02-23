@@ -1,0 +1,16 @@
+<body style="text-align: center;background-color: darkgray;">
+    <h1 style="background-color: aqua;">Creating Course</h1>
+    <div>
+        <form action="{% url 'create_course' %}" method="post">
+            {% csrf_token %}
+            {% for fm in form %}
+            <div style="margin-bottom: 50px;">
+                {{fm.label}} : {{fm}}
+            </div>
+            {% endfor %}
+
+            <button type="submit">SUBMIT</button>
+            <button type="reset">RESET</button>
+        </form>
+    </div>
+</body>
