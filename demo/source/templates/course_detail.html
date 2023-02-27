@@ -10,3 +10,30 @@
 
 <button><a style="text-decoration: none;" href="{% url 'delete_course' course_data.id  %}">DELETE</a></button>
 <button><a style="text-decoration: none;" href="{% url 'course_list' %}">BACK</a></button>
+
+<div>
+    <h1 style="text-align: center;">COURSE TOPICS:</h1>
+    <div>
+        {% for k in course_topic_data %}
+
+        <div>
+            {{k}}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% if user.is_superuser %}
+<div>
+    <h1 style="text-align: center;">Create Sub Topics :</h1>
+
+    <form action="{% url 'create_topic' %}" method="post">
+        {% csrf_token %}
+        {% for i in course_topic_form %}
+        {{i.label}}{{i}}
+        {% endfor %}
+        <button type="submit">SUBMIT</button>
+
+
+    </form>
+</div>
+{% endif %}

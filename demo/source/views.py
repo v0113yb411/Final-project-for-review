@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .forms import LoginForm,CourseForm
+from .forms import LoginForm,CourseForm,TopicForm
 from django.contrib.auth import authenticate, login, logout
 from .models import Student,User,Course,Topic
 
@@ -50,14 +50,22 @@ def create_course(request):
             form.save()
             return redirect('course_list')
 
-
-
-    
+  
 def course_detail(request,pk):
     if request.method=='GET':
         course_data=Course.objects.get(id=pk)
         print(course_data)
-        return render(request,'course_Detail.html',{'course_data':course_data})
+        course_topic_data=Topic.objects.filter(course_id=pk)
+        course_topic_form=TopicForm()
+        return render(request,'course_Detail.html',{'course_topic_form':course_topic_form,'course_topic_data':course_topic_data,'course_data':course_data})
+    
+def create_topic(request):
+    if request.method=="POST":
+        form=TopicForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('course_list')
+        
     
 def more_course(request):
     if request.method=='GET':

@@ -9,25 +9,25 @@
 </head>
 
 <body>
-    <h1>
+    <h1 style="text-align: center;">
         Hello this is course list
         <div>
             <a style="text-decoration: none;" href="{% url 'more_course' %}">Apply for more course<button></button></a>
 
         </div>
-    </h1>
-    <div>
-        {% if user.is_superuser %}
-        <button><a href="{% url 'create_course' %}">Create Course</a></button>
-        {% endif %}
-    </div>
-    {% for course in courses %}
 
-    <div>
-        <a href="{% url 'course_detail' course.id %}">{{course}}</a>
-    </div>
+        <div>
+            {% if user.is_superuser %}
+            <button><a href="{% url 'create_course' %}">Create Course</a></button>
+            {% endif %}
+        </div>
+        {% for course in courses %}
 
-    {% endfor %}
+        <div>
+            <a href="{% url 'course_detail' course.id %}">{{course}}</a>
+        </div>
+
+        {% endfor %}
 </body>
 
 </html>
